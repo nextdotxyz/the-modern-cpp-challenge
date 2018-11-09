@@ -72,8 +72,6 @@ This title does not include starter files. Therefore a doctored solution file sh
 
 Solution files are provided by Packt and the author. Include solution files in the directory under the `.solution` directory. All the project solution files that have been provided should be in this folder. Keep in mind that the student will not have access to this folder, it is a convinience folder for the developer. No blank files should be living in this folder. 
 
-==finish the instructions section==
-
 ### Instructions
 
 Instruction files are created from using the challenge and the challenge solution text. The challenge will be listed as the "Objective" and the solution text will be listed under "Implementation" as individual tasks where relevant. The title listed for the instructions should be "Instructions", unless there are multiple steps within a project. There are some considerations when tech editing and styling the instructions. 
@@ -168,7 +166,7 @@ Grading needs to be enabled. Requirements listed should be toggled on if they ar
 
 ### Codey
 
-Codey will be enabled in this title and will have negative feedback according to specific check it is associated with. Eg. "it looks like you did not use the correct parameter name, make sure it is set to `something`"
+Codey will be enabled in this title and will have negative feedback according to specific the specific task it is associated with. Eg. "it looks like you did not use the correct parameter name, make sure it is set to `something`"
 
 ### Settings
 
