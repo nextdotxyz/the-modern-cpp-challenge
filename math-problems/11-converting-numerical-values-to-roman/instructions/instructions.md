@@ -8,8 +8,7 @@ Roman numerals, as they are known today, use seven symbols: I = 1, V = 5, X = 10
 To determine the Roman numeral of a number, use the following algorithm:
 ```
 1. Check every Roman base symbol from the highest (M) to the lowest (I)
-2. If the current value is greater than the value of the symbol, then concatenate the 
-symbol to the Roman numeral and subtract its value from the current one
+2. If the current value is greater than the value of the symbol, then concatenate the symbol to the Roman numeral and subtract its value from the current one
 3. Repeat until the current value reaches zero
 ```
 
