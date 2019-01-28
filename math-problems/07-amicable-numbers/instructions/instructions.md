@@ -7,3 +7,5 @@ Two numbers are said to be amicable if the sum of the proper divisors of one num
 For instance, the number 220 has the proper divisors 1, 2, 4, 5, 10, 11, 20, 22, 44, 55, and 110, whose sum is 284. The proper divisors of 284 are 1, 2, 4, 71, and 142; their sum is 220. Therefore, the numbers 220 and 284 are said to be amicable.
 
 ### Implementation
+
+The solution to this problem is to iterate through all the numbers up to the given limit. For each number, compute the sum of its proper divisors. Let’s call this `sum1`. Repeat the process and compute the sum of the proper divisors of `sum1`. If the result is equal to the original number, then the number and `sum1` are amicable numbers.
