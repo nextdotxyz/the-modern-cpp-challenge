@@ -20,9 +20,7 @@ void print_amicables(int const limit)
 
 int main()
 {
-   int limit = 0;
-   std::cout << "Upper limit:";
-   std::cin >> limit;
-
+   int limit = 1000000;
    print_amicables(limit);
 }
+
