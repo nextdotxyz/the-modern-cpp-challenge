@@ -26,7 +26,9 @@ void print_amicables(int const limit)
          auto sum2 = sum_proper_divisors(sum1);
          if (sum2 == number && number != sum1)
          {
-            cout << number << "," << sum1 << endl;
+            if(number < sum1){
+               cout << number << "," << sum1 << endl;
+            }
          }
       }
    }
