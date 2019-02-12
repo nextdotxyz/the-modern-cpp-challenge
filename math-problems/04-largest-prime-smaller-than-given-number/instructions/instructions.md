@@ -6,4 +6,6 @@ A prime number is a number that has only two divisors, 1 and the number itself.
 
 ### Implementation
 
-To find the largest prime smaller than a given number you should first write a function that determines if a number is prime and then call this function, starting from the given number, towards 1 until the first prime is encountered. There are various algorithms for determining if a number is prime.
+To find the largest prime smaller than a given number you should first write a function that determines if a number is prime and then call this function, starting from the given number, towards 1 until the first prime is encountered. There are various algorithms for determining if a number is prime. 
+
+One such algorithm is seeing if the number is divisible by any values smaller than itself. If there is even one value smaller than itself, but not 1 and is divisble then the number is not prime.
