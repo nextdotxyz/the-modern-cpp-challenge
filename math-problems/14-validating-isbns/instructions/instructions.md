@@ -8,6 +8,6 @@ The International Standard Book Number (ISBN) is a unique numeric identifier for
 Define `validate_isbn_10` such that it:
 1. Takes an ISBN as a string
 2. Returns `true` if:
-   1. the length of the string is **10**
-   2. all ten elements are digits
-   3. the sum of all digits multiplied by their weight (or position) is a multiple of **11**
+   a. the length of the string is **10**
+   b. all ten elements are digits
+   c. the sum of all digits multiplied by their weight (or position) is a multiple of **11**
