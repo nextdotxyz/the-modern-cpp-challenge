@@ -14,7 +14,7 @@ void print_narcissistics()
             auto arm = a * a * a + b * b * b + c * c * c;
             if (abc == arm)
             {
-               std::cout << arm << std::endl;
+               cout << arm << endl;
             }
          }
       }
