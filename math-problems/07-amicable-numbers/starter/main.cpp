@@ -1,9 +1,12 @@
-#include <iostream>
+#include<iostream>
+#include <math.h>
+
+using namespace std;
 
 int sum_proper_divisors(int const number)
 {
    int result = 1;
-   for (int i = 2; i <= std::sqrt(number); i++)
+   for (int i = 2; i <= sqrt(number); i++)
    {
       if (number%i == 0)
       {
