@@ -1,9 +1,12 @@
-#include <iostream>
+#include<iostream>
+#include <math.h>
+
+using namespace std;
 
 int sum_proper_divisors(int const number)
 {
    int result = 1;
-   for (int i = 2; i <= std::sqrt(number); i++)
+   for (int i = 2; i <= sqrt(number); i++)
    {
       if (number%i == 0)
       {
@@ -23,7 +26,7 @@ void print_amicables(int const limit)
          auto sum2 = sum_proper_divisors(sum1);
          if (sum2 == number && number != sum1)
          {
-            std::cout << number << "," << sum1 << std::endl;
+            cout << number << "," << sum1 << endl;
          }
       }
    }
