@@ -1,4 +1,5 @@
 #include<iostream>
+#include <math.h>
 
 int sum_proper_divisors(int const number)
 {
