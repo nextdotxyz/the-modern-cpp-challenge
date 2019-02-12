@@ -2,7 +2,7 @@
 
 Write a program that prints the prime factors of a number entered by the user.
 
-The prime factors of a positive integer are the prime numbers that divide that integer exactly. For instance, the prime factors of 8 are 2 x 2 x 2, and the prime factors of 42 are 2 x 3 x 7. 
+The prime factors of a positive integer are the prime numbers that divide that integer exactly. For instance, the prime factors of **8** are **2** x **2** x **2**, and the prime factors of **42** are **2** x **3** x **7**. 
 
 ### Implementation
 
