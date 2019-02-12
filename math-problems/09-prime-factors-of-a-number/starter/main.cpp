@@ -1,6 +1,7 @@
 #include <iostream>
+using namespace std;
 
-std::vector<unsigned long long> prime_factors(unsigned long long n)
+vector<unsigned long long> prime_factors(unsigned long long n)
 {
  
 }
@@ -8,9 +9,9 @@ std::vector<unsigned long long> prime_factors(unsigned long long n)
 int main()
 {
    unsigned long long number = 0;
-   std::cout << "number:";
-   std::cin >> number;
+   cout << "number:";
+   cin >> number;
    auto factors = prime_factors(number);
-   std::copy(std::begin(factors), std::end(factors),
-   std::ostream_iterator<unsigned long long>(std::cout, " "));
+   copy(std::begin(factors), end(factors),
+   ostream_iterator<unsigned long long>(cout, " "));
 }
