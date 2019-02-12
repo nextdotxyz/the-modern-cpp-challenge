@@ -14,7 +14,9 @@ else g[i] = b[i]
 
 This is equivalent to the following:
 
-`g = b xor (b logically right shifted 1 time)`
+```
+g = b xor (b logically right shifted 1 time)
+```
 
 For decoding a binary reflected Gray code, the following formula should be used:
 
