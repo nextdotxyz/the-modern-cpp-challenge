@@ -8,4 +8,6 @@ For instance, the number 220 has the proper divisors 1, 2, 4, 5, 10, 11, 20, 22,
 
 ### Implementation
 
-The solution to this problem is to iterate through all the numbers up to the given limit. For each number, compute the sum of its proper divisors. Let’s call this `sum1`. Repeat the process and compute the sum of the proper divisors of `sum1`. If the result is equal to the original number, then the number and `sum1` are amicable numbers.
+The solution to this problem is to iterate through all the numbers up to the given `limit`. For each number, compute the sum of its proper divisors. Let’s call this `sum1`. Repeat the process and compute the sum of the proper divisors of `sum1`. If the result is equal to the original number, then the number and `sum1` are amicable numbers.
+
+Make sure not to print the same pair twice, ex. **220,284** and **284,220** are the same pair.
