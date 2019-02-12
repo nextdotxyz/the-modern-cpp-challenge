@@ -1,9 +1,12 @@
 #include<iostream>
+#include <math.h>
+
+using namespace std;
 
 int sum_proper_divisors(int const number)
 {
    int result = 1;
-   for (int i = 2; i <= std::sqrt(number); i++)
+   for (int i = 2; i <= sqrt(number); i++)
    {
       if (number%i == 0)
       {
@@ -20,8 +23,8 @@ void print_abundant(int const limit)
       auto sum = sum_proper_divisors(number);
       if (sum > number)
       {
-         std::cout << number << ", abundance=" 
-                   << sum - number << std::endl;
+         cout << number << ", abundance=" 
+                   << sum - number << endl;
       }
    }
 }
@@ -29,8 +32,8 @@ void print_abundant(int const limit)
 int main()
 {
    int limit = 0;
-   std::cout << "Upper limit:";
-   std::cin >> limit;
+   cout << "Upper limit:";
+   cin >> limit;
 
    print_abundant(limit);
 }
