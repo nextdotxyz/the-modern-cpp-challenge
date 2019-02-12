@@ -2,7 +2,7 @@
 
 Write a program that, given a number entered by the user, prints its Roman numeral equivalent. 
 
-Roman numerals, as they are known today, use seven symbols: **I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, and M = 1000**. The system uses additions and subtractions in composing the numerical symbols. The symbols from **1** to **10** are **I, II, III, IV, V, VI, VII, VIII, IX, and X**. 
+Roman numerals, as they are known today, use seven symbols: **I = 1**, **V = 5**, **X = 10**, **L = 50**, **C = 100**, **D = 500**, and **M = 1000**. The system uses additions and subtractions in composing the numerical symbols. The symbols from **1** to **10** are **I**, **II**, **III**, **IV**, **V**, **VI**, **VII**, **VIII**, **IX**, and **X**. 
 
 Romans did not have a symbol for zero and used to write nulla to represent it. In this system, the largest symbols are on the left, and the least significant are on the right. As an example, the Roman numeral for **1994** is **MCMXCIV**. If you are not familiar with the rules for Roman numerals, you should read more on the web.
 
