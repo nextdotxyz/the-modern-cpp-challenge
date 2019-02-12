@@ -11,7 +11,7 @@ To determine the Roman numeral of a number, use the following algorithm:
 
 1. Check every Roman base symbol from the highest (**M**) to the lowest (**I**)
 2. If the current value is greater than the value of the symbol, then concatenate the symbol to the Roman numeral and subtract its value from the current one
-3. Repeat until the current value reaches zero
+3. Repeat until the current value reaches **zero**
 
 
 For example, consider **4**2: the first Roman base symbol smaller than **42** is **XL**, which is **40**. We concatenate it to the numeral, resulting in **XL**, and subtract from the current number, resulting in **2**. The first Roman base symbol smaller than **2** is **I**, which is **1**. We add that to the numeral, resulting in **XLI**, and subtract **1** from the number, resulting in **1**. We add one more **I** to the numeral, which becomes **XLII**, and subtract again **1** from the number, reaching **0** and therefore stopping.
