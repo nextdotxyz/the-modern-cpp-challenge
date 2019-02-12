@@ -19,7 +19,7 @@ int lcm(int const a, int const b)
 
 int main()
 {
-    int const a, b;
+    int a, b;
     cout << "Value for 'a': ";
     cin >> a;
     
