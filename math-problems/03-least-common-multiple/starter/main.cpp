@@ -23,7 +23,7 @@ int main()
     cout << "Value for 'a': ";
     cin >> a;
     
-    cout << "Value for 'b': "
+    cout << "Value for 'b': ";
     cin >> b;
     
     cout << "lcm = " << lcm(a,b);
