@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <string>
+#include <bitset>
 using namespace std;
 
 unsigned int gray_encode(unsigned int const num)
