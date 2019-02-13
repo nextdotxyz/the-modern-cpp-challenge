@@ -1,5 +1,7 @@
 #include <iostream>
 #include <math.h>
+#include <vector>
+#include <iterator>
 using namespace std;
 
 vector<unsigned long long> prime_factors(unsigned long long n)
