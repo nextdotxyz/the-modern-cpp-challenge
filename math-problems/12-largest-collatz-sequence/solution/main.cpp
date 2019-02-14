@@ -1,10 +1,13 @@
 #include <iostream>
+#include <vector>
+#include <utility>
+using namespace std;
 
-std::pair<unsigned long long, long> longest_collatz(unsigned long long const limit)
+pair<unsigned long long, long> longest_collatz(unsigned long long const limit)
 {
    long length = 0;
    unsigned long long number = 0;
-   std::vector<int> cache(limit + 1, 0);
+   vector<int> cache(limit + 1, 0);
 
    for (unsigned long long i = 2; i <= limit; i++) 
    {
@@ -25,10 +28,17 @@ std::pair<unsigned long long, long> longest_collatz(unsigned long long const lim
       }
    }
 
-   return std::make_pair(number, length);
+   return make_pair(number, length);
+}
+
+ostream& operator<<(ostream& os, const pair<unsigned long long, long>& obj)
+{
+  // write obj to stream
+  os << "Length: " << obj.second << \t << "Starting Num: " << obj.first << endl;
+  return os;
 }
 
 int main()
 {
-   std::cout << longest_collatz(1000000);
+   cout << longest_collatz(1000000);
 }
