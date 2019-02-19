@@ -9,6 +9,7 @@ using namespace std;
 
 template <typename E = mt19937, 
           typename D = uniform_real_distribution<>>
+          
 double compute_pi(E& engine, D& dist, int const samples = 1000000)
 {
    auto hit = 0;
