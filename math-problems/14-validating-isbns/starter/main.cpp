@@ -6,7 +6,7 @@ using namespace std;
 
 bool validate_isbn_10(string isbn)
 {
-  
+  auto valid = false;
 }
 
 int main()
