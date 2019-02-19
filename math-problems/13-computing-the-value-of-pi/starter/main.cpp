@@ -1,5 +1,5 @@
 #include <iostream>
-#include <math>
+#include <math.h>
 #include <random>
 #include <chrono>
 using namespace std;
