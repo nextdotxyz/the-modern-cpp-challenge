@@ -26,5 +26,5 @@ int main()
     cout << "Value for 'b': ";
     cin >> b;
     
-    cout << "lcm = " << lcm(a,b);
+    cout << "lcm = " << lcm(a,b) << endl;
  }
