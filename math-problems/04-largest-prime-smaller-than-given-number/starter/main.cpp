@@ -2,7 +2,7 @@
 
 bool is_prime(int const num) 
 {
-   
+   //enter your code here
 }
 
 int main()

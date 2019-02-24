@@ -18,7 +18,7 @@ int sum_proper_divisors(int const number)
 
 void print_amicables(int const limit)
 {
-   
+   //enter your code here
 }
 
 int main()

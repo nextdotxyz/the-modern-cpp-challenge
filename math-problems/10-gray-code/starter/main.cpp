@@ -6,17 +6,17 @@ using namespace std;
 
 unsigned int gray_encode(unsigned int const num)
 {
-   
+   //enter your code here
 }
 
 unsigned int gray_decode(unsigned int gray)
 {
-   
+   //enter your code here
 }
 
 string to_binary(unsigned int value, int const digits)
 {
-
+   //enter your code here
 }
 
 int main()

@@ -32,4 +32,5 @@ int main()
    auto factors = prime_factors(number);
    copy(std::begin(factors), end(factors),
    ostream_iterator<unsigned long long>(cout, " "));
+   cout << endl;
 }

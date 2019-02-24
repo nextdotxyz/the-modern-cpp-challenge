@@ -5,12 +5,12 @@ using namespace std;
 
 int sum_proper_divisors(int const number)
 {
-   
+   //enter your code here
 }
 
 void print_abundant(int const limit)
 {
-   
+   //enter your code here
 }
 
 int main()

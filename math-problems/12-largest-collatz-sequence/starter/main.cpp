@@ -5,7 +5,7 @@ using namespace std;
 
 std::pair<unsigned long long, long> longest_collatz(unsigned long long const limit)
 {
-  
+	//enter your code here
 }
 
 ostream& operator<<(ostream& os, const pair<unsigned long long, long>& obj)

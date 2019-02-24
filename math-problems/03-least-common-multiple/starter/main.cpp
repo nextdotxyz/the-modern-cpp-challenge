@@ -14,7 +14,7 @@ unsigned int gcd(unsigned int a, unsigned int b)
 
 int lcm(int const a, int const b)
 {
-   
+   //enter your code here
 }
 
 int main()

@@ -12,7 +12,7 @@ template <typename E = mt19937,
           
 double compute_pi(E& engine, D& dist, int const samples = 1000000)
 {
-
+	//enter your code here
 }
 
 int RandomNumber () { return (rand()%100); }

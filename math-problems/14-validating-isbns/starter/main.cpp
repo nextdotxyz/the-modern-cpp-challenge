@@ -7,6 +7,7 @@ using namespace std;
 bool validate_isbn_10(string isbn)
 {
   auto valid = false;
+  //enter your code here
 }
 
 int main()
@@ -19,11 +20,11 @@ int main()
    
    if(valid)
    {
-     cout << input << " is a valid ISBN.";
+     cout << input << " is a valid ISBN." << endl;
    }
    else
    {
-     cout << input << " is not a valid ISBN.";
+     cout << input << " is not a valid ISBN." << endl;
    }
 }
 
