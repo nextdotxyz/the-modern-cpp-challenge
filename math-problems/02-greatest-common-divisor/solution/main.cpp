@@ -21,5 +21,5 @@ int main()
     cout << "Value for 'b': ";
     cin >> b;
     
-    cout << "gcd = " << gcd(a,b);
+    cout << "gcd = " << gcd(a,b) << endl;
  }

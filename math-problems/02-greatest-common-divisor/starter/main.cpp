@@ -4,7 +4,7 @@ using namespace std;
 
 unsigned int gcd(unsigned int a, unsigned int b)
 {
-   
+   //enter your code here
 }
 
 int main()
@@ -16,5 +16,5 @@ int main()
     cout << "Value for 'b': ";
     cin >> b;
     
-    cout << "gcd = " << gcd(a,b);
+    cout << "gcd = " << gcd(a,b) << endl;
  }
