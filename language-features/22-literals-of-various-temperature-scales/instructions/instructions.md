@@ -13,7 +13,7 @@ To meet this requirement, we need to provide an implementation for several types
 1. An enumeration of supported temperature scales called `scale`.
 2. A class template to represent a temperature value, parameterized with the scale, called `quantity.`
 3. Comparison operators `==`, `!=`, `<`, `>`,`<=`, and `>=` that compare two quantities of the same time.
-4. Arithmetic operators `+` and `-` that add and subtract values of the same quantity type. Additionally, we could implement member operators `+=` and `-+`.
+4. Arithmetic operators `+` and `-` that add and subtract values of the same quantity type. (Bonus: implement member operators `+=` and `-+`.)
 5. A function template to convert temperatures from one scale to another, called `temperature_cast`. This function does not perform the conversion itself but uses type traits to do that.
 6. Literal operators `""_deg`, `""_f`, and `""_k` for creating user-defined temperature literals.
 
