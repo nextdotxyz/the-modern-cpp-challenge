@@ -1,8 +1,9 @@
 ### Objective
 
-Write a set of general-purpose functions that enable checking whether **any**, **all**, or **none** of the specified arguments are present in a given container.
-
-(There are functions provided to assist you.)
+Write a set of general-purpose functions that enable checking whether:
+1. any of the specified arguments are present in a given container 
+2. all of the specified arguments are present in a given container 
+3. none of the specified arguments are present in a given container
 
 ### Implementation
 
