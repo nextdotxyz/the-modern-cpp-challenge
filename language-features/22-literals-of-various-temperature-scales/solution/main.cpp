@@ -1,284 +1,205 @@
-#ifdef _WIN32
-#include <windows.h>
-#else
-typedef void *HANDLE;
+#include <cmath>
+#include <assert.h>
 
-#define DWORD     unsigned long
-#ifdef _LP64
-#define LONG_PTR  long long
-#define ULONG_PTR unsigned long long
-#else
-#define LONG_PTR  long
-#define ULONG_PTR unsigned long
-#endif
-#define INVALID_HANDLE_VALUE ((HANDLE)(LONG_PTR)-1)
-
-struct SECURITY_ATTRIBUTES
+bool are_equal(double const d1, double const d2, double const epsilon = 0.001)
 {
-    DWORD nLength;
-    void* lpSecurityDescriptor;
-    int bInheritHandle;
-};
+   return std::fabs(d1 - d2) < epsilon;
+}
 
-struct OVERLAPPED
+namespace temperature
 {
-    ULONG_PTR Internal;
-    ULONG_PTR InternalHigh;
-    union {
-        struct {
-            DWORD Offset;
-            DWORD OffsetHigh;
-        } DUMMYSTRUCTNAME;
-        
-        void* Pointer;
-    } DUMMYUNIONNAME;
-    
-    HANDLE hEvent;
-};
-
-int CloseHandle(HANDLE hObject) {return 0;}
-HANDLE CreateFile(char const *,
-                  DWORD,
-                  DWORD,
-                  SECURITY_ATTRIBUTES*,
-                  DWORD,
-                  DWORD,
-                  HANDLE)
-{return INVALID_HANDLE_VALUE;}
-
-int ReadFile(HANDLE,
-             void*,
-             DWORD,
-             DWORD *,
-             OVERLAPPED*)
-{return 0;}
-
-#define GENERIC_READ           0x80000000L
-#define GENERIC_WRITE          0x40000000L
-#define CREATE_NEW             1
-#define CREATE_ALWAYS          2
-#define OPEN_EXISTING          3
-#define OPEN_ALWAYS            4
-#define TRUNCATE_EXISTING      5
-#define FILE_SHARE_READ        1
-#define FILE_ATTRIBUTE_NORMAL  0x00000080
-#endif
-
-#include <algorithm>
-#include <vector>
-using namespace std;
-
-
-template <typename Traits>
-class unique_handle
-{
-   using pointer = typename Traits::pointer;
-
-   pointer m_value;
-
-public:
-   unique_handle(unique_handle const &) = delete;
-   unique_handle& operator=(unique_handle const &) = delete;
-
-   explicit unique_handle(pointer value = Traits::invalid()) noexcept
-      :m_value{ value }
-   {}
-
-   unique_handle(unique_handle && other) noexcept
-      : m_value{ other.release() }
-   {}
-
-   unique_handle& operator=(unique_handle && other) noexcept
+   enum class scale
    {
-      if (this != &other)
+      celsius,
+      fahrenheit,
+      kelvin
+   };
+
+   template <scale S>
+   class quantity
+   {
+      const double amount;
+   public:
+      constexpr explicit quantity(double const a) : amount(a) {}
+
+      explicit operator double() const { return amount; }
+   };
+
+   template <scale S>
+   inline bool operator==(quantity<S> const & lhs, quantity<S> const & rhs)
+   {
+      return are_equal(static_cast<double>(lhs), static_cast<double>(rhs));
+   }
+
+   template <scale S>
+   inline bool operator!=(quantity<S> const & lhs, quantity<S> const & rhs)
+   {
+      return !(lhs == rhs);
+   }
+
+   template <scale S>
+   inline bool operator< (quantity<S> const & lhs, quantity<S> const & rhs)
+   {
+      return static_cast<double>(lhs) < static_cast<double>(rhs);
+   }
+
+   template <scale S>
+   inline bool operator> (quantity<S> const & lhs, quantity<S> const & rhs)
+   {
+      return rhs < lhs;
+   }
+
+   template <scale S>
+   inline bool operator<=(quantity<S> const & lhs, quantity<S> const & rhs)
+   {
+      return !(lhs > rhs);
+   }
+
+   template <scale S>
+   inline bool operator>=(quantity<S> const & lhs, quantity<S> const & rhs)
+   {
+      return !(lhs < rhs);
+   }
+
+   template <scale S>
+   constexpr quantity<S> operator+(quantity<S> const &q1, quantity<S> const &q2)
+   {
+      return quantity<S>(static_cast<double>(q1) + static_cast<double>(q2));
+   }
+
+   template <scale S>
+   constexpr quantity<S> operator-(quantity<S> const &q1, quantity<S> const &q2)
+   {
+      return quantity<S>(static_cast<double>(q1) - static_cast<double>(q2));
+   }
+
+   template <scale S, scale R>
+   struct conversion_traits
+   {
+      static double convert(double const value) = delete;
+   };
+
+   template <>
+   struct conversion_traits<scale::celsius, scale::kelvin>
+   {
+      static double convert(double const value)
       {
-         reset(other.release());
+         return value + 273.15;
+      }
+   };
+
+   template <>
+   struct conversion_traits<scale::kelvin, scale::celsius>
+   {
+      static double convert(double const value)
+      {
+         return value - 273.15;
+      }
+   };
+
+   template <>
+   struct conversion_traits<scale::celsius, scale::fahrenheit>
+   {
+      static double convert(double const value)
+      {
+         return (value * 9) / 5 + 32;;
+      }
+   };
+
+   template <>
+   struct conversion_traits<scale::fahrenheit, scale::celsius>
+   {
+      static double convert(double const value)
+      {
+         return (value - 32) * 5 / 9;
+      }
+   };
+
+   template <>
+   struct conversion_traits<scale::fahrenheit, scale::kelvin>
+   {
+      static double convert(double const value)
+      {
+         return (value + 459.67) * 5 / 9;
+      }
+   };
+
+   template <>
+   struct conversion_traits<scale::kelvin, scale::fahrenheit>
+   {
+      static double convert(double const value)
+      {
+         return (value * 9) / 5 - 459.67;
+      }
+   };
+
+   template <scale R, scale S>
+   constexpr quantity<R> temperature_cast(quantity<S> const q)
+   {
+      return quantity<R>(conversion_traits<S, R>::convert(static_cast<double>(q)));
+   }
+
+   namespace temperature_scale_literals
+   {
+      constexpr quantity<scale::celsius> operator "" _deg(long double const amount)
+      {
+         return quantity<scale::celsius> {static_cast<double>(amount)};
       }
 
-      return *this;
-   }
-
-   ~unique_handle() noexcept
-   {
-      Traits::close(m_value);
-   }
-
-   explicit operator bool() const noexcept
-   {
-      return m_value != Traits::invalid();
-   }
-
-   pointer get() const noexcept
-   {
-      return m_value;
-   }
-
-   pointer release() noexcept
-   {
-      auto value = m_value;
-      m_value = Traits::invalid();
-      return value;
-   }
-
-   bool reset(pointer value = Traits::invalid()) noexcept
-   {
-      if (m_value != value)
+      constexpr quantity<scale::fahrenheit> operator "" _f(long double const amount)
       {
-         Traits::close(m_value);
-         m_value = value;
+         return quantity<scale::fahrenheit> {static_cast<double>(amount)};
       }
 
-      return static_cast<bool>(*this);
+      constexpr quantity<scale::kelvin> operator "" _k(long double const amount)
+      {
+         return quantity<scale::kelvin> {static_cast<double>(amount)};
+      }
    }
-
-   void swap(unique_handle<Traits> & other) noexcept
-   {
-      swap(m_value, other.m_value);
-   }
-};
-
-template <typename Traits>
-void swap(unique_handle<Traits> & left,
-   unique_handle<Traits> & right) noexcept
-{
-   left.swap(right);
-}
-
-template <typename Traits>
-bool operator==(
-   unique_handle<Traits> const & left,
-   unique_handle<Traits> const & right) noexcept
-{
-   return left.get() == right.get();
-}
-
-template <typename Traits>
-bool operator!=(
-   unique_handle<Traits> const & left,
-   unique_handle<Traits> const & right) noexcept
-{
-   return left.get() != right.get();
-}
-
-struct null_handle_traits
-{
-   using pointer = HANDLE;
-
-   static pointer invalid() noexcept
-   {
-      return nullptr;
-   }
-
-   static void close(pointer value) noexcept
-   {
-      CloseHandle(value);
-   }
-};
-
-struct invalid_handle_traits
-{
-   using pointer = HANDLE;
-
-   static pointer invalid() noexcept
-   {
-      return INVALID_HANDLE_VALUE;
-   }
-
-   static void close(pointer value) noexcept
-   {
-      CloseHandle(value);
-   }
-};
-
-using null_handle = unique_handle<null_handle_traits>;
-using invalid_handle = unique_handle<invalid_handle_traits>;
-
-void function_that_throws()
-{
-    throw runtime_error("an error has occurred");
-}
-
-void bad_handle_example()
-{
-    bool condition1 = false;
-    bool condition2 = true;
-    HANDLE handle = CreateFile("sample.txt",
-                               GENERIC_READ,
-                               FILE_SHARE_READ,
-                               nullptr,
-                               OPEN_EXISTING,
-                               FILE_ATTRIBUTE_NORMAL,
-                               nullptr);
-    
-    if (handle == INVALID_HANDLE_VALUE)
-        return;
-    
-    if (condition1)
-    {
-        CloseHandle(handle);
-        return;
-    }
-    
-    vector<char> buffer(1024);
-    unsigned long bytesRead = 0;
-    ReadFile(handle, buffer.data(), buffer.size(), &bytesRead, nullptr);
-    
-    if (condition2)
-    {
-        // oops, forgot to close handle
-        return;
-    }
-    
-    // throws exception; the next line will not execute
-    function_that_throws();
-    
-    CloseHandle(handle);
-}
-
-void good_handle_example()
-{
-    bool condition1 = false;
-    bool condition2 = true;
-    
-    invalid_handle handle{
-        CreateFile("sample.txt",
-                   GENERIC_READ,
-                   FILE_SHARE_READ,
-                   nullptr,
-                   OPEN_EXISTING,
-                   FILE_ATTRIBUTE_NORMAL,
-                   nullptr) };
-    
-    if (!handle) return;
-    
-    if (condition1) return;
-    
-    vector<char> buffer(1024);
-    unsigned long bytesRead = 0;
-    ReadFile(handle.get(),
-             buffer.data(),
-             buffer.size(),
-             &bytesRead,
-             nullptr);
-    
-    if (condition2) return;
-    
-    function_that_throws();
 }
 
 int main()
 {
-    try
-    {
-        bad_handle_example();
-    }
-    catch (...) {}
-    
-    try
-    {
-        good_handle_example();
-    }
-    catch (...) {}
-    
-    return 0;
+   using namespace temperature;
+   using namespace temperature_scale_literals;
+
+   auto t1{ 36.5_deg };
+   auto t2{ 79.0_f };
+   auto t3{ 100.0_k };
+
+   {
+      auto tf = temperature_cast<scale::fahrenheit>(t1);
+      auto tc = temperature_cast<scale::celsius>(tf);
+      assert(t1 == tc);
+   }
+
+   {
+      auto tk = temperature_cast<scale::kelvin>(t1);
+      auto tc = temperature_cast<scale::celsius>(tk);
+      assert(t1 == tc);
+   }
+
+   {
+      auto tc = temperature_cast<scale::celsius>(t2);
+      auto tf = temperature_cast<scale::fahrenheit>(tc);
+      assert(t2 == tf);
+   }
+
+   {
+      auto tk = temperature_cast<scale::kelvin>(t2);
+      auto tf = temperature_cast<scale::fahrenheit>(tk);
+      assert(t2 == tf);
+   }
+
+   {
+      auto tc = temperature_cast<scale::celsius>(t3);
+      auto tk = temperature_cast<scale::kelvin>(tc);
+      assert(t3 == tk);
+   }
+
+   {
+      auto tf = temperature_cast<scale::fahrenheit>(t3);
+      auto tk = temperature_cast<scale::kelvin>(tf);
+      assert(t3 == tk);
+   }
 }
