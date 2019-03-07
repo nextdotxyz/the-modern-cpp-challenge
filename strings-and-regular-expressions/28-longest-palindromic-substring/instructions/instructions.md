@@ -1,6 +1,7 @@
 ### Objective
 
-
+Write a function that, given an input string, locates and returns the longest sequence in the string that is a palindrome. If multiple palindromes of the same length exist, the first one should be returned.
 
 ### Implementation
 
+The simplest solution to this problem is to try a brute-force approach, checking if each substring is a palindrome. However, this means we need to check **C(N, 2)** substrings (where __N__ is the number of characters in the string), and the time complexity would be __O(N^3)__. The complexity could be reduced to __O(N^2)__ by storing results of sub problems. To do so we need a table of Boolean values, of size __N*N__, where the element at `[i, j]` indicates whether the substring from position `i` to `j` is a palindrome. We start by initializing all elements `[i,i]` with `true` (one-character palindromes) and all the elements `[i,i+i]` with `true` for all consecutive two identical characters (for two-character palindromes). We then go on to inspect substrings greater than two characters, setting the element at `[i,j]` to true if the element at `[i+i,j-1]` is `true` and the characters on the positions `i` and `j` in the string are also equal. Along the way, we retain the start position and length of the longest palindromic substring in order to extract it after finishing computing the table.
