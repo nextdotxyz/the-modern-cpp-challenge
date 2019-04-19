@@ -66,8 +66,16 @@ int ReadFile(HANDLE,
 
 #include <algorithm>
 #include <vector>
+#include <exception>
 using namespace std;
 
+class runtime_error: public exception
+{
+    virtual const char* what() const throw()
+    {
+        return "an error has occured";
+    }
+};
 
 template <typename Traits>
 class unique_handle
@@ -195,7 +203,7 @@ using invalid_handle = unique_handle<invalid_handle_traits>;
 
 void function_that_throws()
 {
-    throw runtime_error("an error has occurred");
+    throw runtime_error();
 }
 
 void bad_handle_example()
