@@ -12,3 +12,6 @@ skype.exe       22456  Suspended  marius.bancila      656  64-bit
 ```
 
 # Implementation
+
+In order to print the status and platform as text and not as numerical values, we need conversion functions from the enumerations to `std::string:`
+The processes are required to be sorted alphabetically by process name. Therefore, the first step would be to sort the input range of processes. For the printing itself, we should use the I/O manipulators
